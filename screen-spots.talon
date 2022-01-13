@@ -8,3 +8,5 @@ spot (click|touch) <number_small>: user.click_spot(number_small)
 
 # move the cursor to a saved spot
 spot [move] <number_small>: user.move_spot(number_small)
+
+spot drag <number_small>: user.drag_spot(number_small)

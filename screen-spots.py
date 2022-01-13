@@ -35,3 +35,9 @@ class SpotClass:
         if was_moved:
             ctrl.mouse_click(button=0)
             actions.mouse_move(current_x, current_y)
+
+    def drag_spot(spot_number: int):
+        """Drag the mouse from its current location to the saved position (if it exists)"""
+        if spot_number in spot_dictionary:
+            actions.user.mouse_drag(0)
+            actions.user.move_spot(spot_number)
