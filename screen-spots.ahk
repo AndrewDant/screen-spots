@@ -3,6 +3,7 @@
 ; save default or extra spot sets to files
 ; replace all ahk functionality with talon code
 
+
 ; use absolute screen coordinates for mouse positions
 CoordMode, Mouse, Screen
 
@@ -28,7 +29,7 @@ clickSpot(spotNumber) {
 	; check if cursor was moved
 	if (moved) {
 		Click
-		MouseMove, originalMouseX, originalMouseY, 0
+		MouseMove, originalMouseX, originalMouseY
 	}
 }
 
@@ -42,7 +43,7 @@ moveSpot(spotNumber) {
 
 	; check if pos of spot is stored
 	if (spotX and spotY) {
-		MouseMove, spotX, spotY, 0
+		MouseMove, spotX, spotY
 		Return True
 	}
 	Return False
