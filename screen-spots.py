@@ -1,8 +1,9 @@
-from talon import ctrl, Module, actions
+from talon import ctrl, Module, actions, storage
 
 mod = Module()
 
-spot_dictionary = {}
+# Initialize with the spots in storage if there are any
+spot_dictionary = storage.get("screen-spots", {})
 
 @mod.action_class
 class SpotClass:
@@ -41,3 +42,7 @@ class SpotClass:
         if spot_number in spot_dictionary:
             actions.user.mouse_drag(0)
             actions.user.move_spot(spot_number)
+
+    def backup_spot():
+        """Save the spot dictionary to be used again upon reload"""
+        storage.set("screen-spots", spot_dictionary)
