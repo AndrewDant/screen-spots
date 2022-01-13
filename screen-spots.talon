@@ -1,6 +1,3 @@
-# TODO sometimes coordinates wants to be relative to the current window, could toggle with a command
-# save default or extra spot sets to files
-
 mode: command
 -
 # save a mouse position to a spot index
