@@ -24,4 +24,4 @@ reduce mouse movement speed (instant movement sometimes causes issues)
 
 sometimes coordinates would be better if relative to the current window, could toggle with a command
 
-backup spot sets to files or cache
+backup application specific spot sets to files or cache

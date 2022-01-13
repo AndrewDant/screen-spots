@@ -2,7 +2,7 @@ from talon import ctrl, Module, actions, storage
 
 mod = Module()
 
-# Initialize with the spots in storage if there are any
+# Initialize with the spots in storage if there are any. All keys should be strings
 spot_dictionary = storage.get("screen-spots", {})
 
 @mod.action_class
