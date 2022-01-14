@@ -8,7 +8,7 @@ spot_dictionary = storage.get("screen-spots", {})
 @mod.action_class
 class SpotClass:
     def save_spot(spot_key: str):
-        """Saves the current mouse position (to a specific number)"""
+        """Saves the current mouse position (to a specific key)"""
         x = actions.mouse_x()
         y = actions.mouse_y()
 
@@ -16,7 +16,7 @@ class SpotClass:
 
     def move_spot(spot_key: str) -> bool:
         """
-        Moves the cursor to a location, if one was saved for the given index.
+        Moves the cursor to a location, if one was saved for the given key.
         Returns true if the cursor was moved
         """
         if spot_key in spot_dictionary:
@@ -51,3 +51,9 @@ class SpotClass:
         """Reset the active spot list to a new empty dictionary"""
         global spot_dictionary
         spot_dictionary = {}
+        
+    def clear_spot(spot_key: str):
+        """Remove a specific saved spot"""
+        global spot_dictionary
+        if spot_key in spot_dictionary:
+            del spot_dictionary[spot_key]

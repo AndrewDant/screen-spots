@@ -16,4 +16,7 @@ spot drag <user.text>: user.drag_spot(user.text)
 spot backup: user.backup_spot()
 
 # deletes all current spots (does not alter the cached dictionary)
-spot clear all: user.clear_spot_dictionary()
+spot full clear: user.clear_spot_dictionary()
+
+# delete a specific spot
+spot clear <user.text>: user.clear_spot(user.text)
