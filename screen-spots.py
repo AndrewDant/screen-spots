@@ -47,4 +47,7 @@ class SpotClass:
         """Save the spot dictionary to be used again upon reload"""
         storage.set("screen-spots", spot_dictionary)
 
-
+    def clear_spot_dictionary():
+        """Reset the active spot list to a new empty dictionary"""
+        global spot_dictionary
+        spot_dictionary = {}

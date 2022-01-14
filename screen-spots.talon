@@ -14,3 +14,6 @@ spot drag <user.text>: user.drag_spot(user.text)
 
 # save all current spots to a cache that survives reloads
 spot backup: user.backup_spot()
+
+# deletes all current spots (does not alter the cached dictionary)
+spot clear all: user.clear_spot_dictionary()
