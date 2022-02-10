@@ -1,9 +1,26 @@
-from talon import ctrl, Module, actions, storage
+from talon import ctrl, Module, actions, storage, imgui
 
 mod = Module()
 
 # Initialize with the spots in storage if there are any. All keys should be strings
 spot_dictionary = storage.get("screen-spots", {})
+
+
+@imgui.open(y=0)
+def gui_list_keys(gui: imgui.GUI):
+    global spot_dictionary
+
+    gui.text("spot names")
+    gui.line()
+
+    for key in spot_dictionary:
+        gui.text(key)
+
+    gui.spacer()
+
+    if gui.button("Spot close"):
+        actions.user.close_spot_list()
+
 
 @mod.action_class
 class SpotClass:
@@ -57,3 +74,11 @@ class SpotClass:
         global spot_dictionary
         if spot_key in spot_dictionary:
             del spot_dictionary[spot_key]
+
+    def list_spot():
+        """Display a list of existing spot names"""
+        gui_list_keys.show()
+
+    def close_spot_list():
+        """Closes the list of existing spot names"""
+        gui_list_keys.hide()

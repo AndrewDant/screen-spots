@@ -20,3 +20,9 @@ spot full clear: user.clear_spot_dictionary()
 
 # delete a specific spot
 spot clear <user.text>: user.clear_spot(user.text)
+
+# display a list of all active spot names
+spot list [all]: user.list_spot()
+
+# Close the list of active spot names. including 'clothes' because that's commonly misheard by talon
+spot (close|clothes)$: user.close_spot_list()
