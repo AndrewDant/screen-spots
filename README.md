@@ -25,10 +25,20 @@ Say "spot save enemy"
 
 Say "spot enemy" whenever you want to move your mouse over that spot
 
+Say "spot drag enemy" to click and drag from the current mouse position to that spot
+
+Check screen-spots.talon for more commands. You can backup your spots, delete some or all, and list all spot names
+
 # Working Items
+display spot positions on screen, reference talon_ui_helper
+
 reduce mouse movement speed (instant movement sometimes causes issues)
 
 sometimes coordinates would be better if relative to the current window, could toggle with a command
-    * assuming this is possible for Talon. Originally meant for ahk
+    * reference talon_ui_helper
 
-backup application specific spot sets to files or cache
+application specific spot sets?
+
+command to reload from backup
+
+setting to allow auto backup when you save/clear any spot?
