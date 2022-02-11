@@ -5,6 +5,8 @@ Defines shortcuts for saving the current mouse coordinates to a specific word/ph
 
 The intended use case is to save the position of buttons or other frequently used locations so that you can click on them or return to them more quickly and with less effort.
 
+Your spots are automatically saved to a file so you maintain your set across restarts.
+
 # Installation
 Assumes you already have talon.
 
@@ -27,7 +29,7 @@ Say "spot enemy" whenever you want to move your mouse over that spot
 
 Say "spot drag enemy" to click and drag from the current mouse position to that spot
 
-Check screen-spots.talon for more commands. You can backup your spots, delete some or all, and list all spot names
+Check screen-spots.talon for more commands. You can delete some or all and list all spot names
 
 # Working Items
 display spot positions on screen, reference talon_ui_helper
