@@ -3,12 +3,15 @@ mode: command
 # save a mouse position to a spot name
 spot save <user.text>: user.save_spot(user.text)
 
-spot show all: user.show_spot()
+spot heatmap: user.show_spot()
+
+spot heatmap off: user.hide_spot()
 
 # click a saved spot then return the cursor to its prior position
 spot (click|touch) <user.text>: user.click_spot(user.text)
 
 # move the cursor to a saved spot
+
 spot [move] <user.text>: user.move_to_spot(user.text)
 
 # hold left click then move the cursor to a saved spot

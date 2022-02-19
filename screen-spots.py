@@ -62,6 +62,11 @@ class SpotClass:
         global can
         can.freeze()
 
+    def hide_spot():
+        """Hide all spots"""
+        global can
+        can.hide()
+
     def move_to_spot(spot_key: str) -> bool:
         """
         Moves the cursor to a location, if one was saved for the given key.
