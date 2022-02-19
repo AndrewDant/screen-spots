@@ -1,6 +1,7 @@
 from talon import ctrl, Module, actions, storage, imgui, ui, canvas
 from typing import List, NamedTuple, Optional
 from talon.types import Rect
+from talon.skia import Shader, Color, Paint, Rect
 
 mod = Module()
 
@@ -32,16 +33,10 @@ def backup_spot():
 can = canvas.Canvas.from_screen(ui.main_screen())
 
 def draw_spot(canvas):
+    canvas.paint.color = "ff0F9D58"
+    canvas.paint.style = Paint.Style.FILL
     for key, spot in spot_dictionary.items():
-        print(f"spot: {spot}")
-        print(f"ordinates: {spot[0]}, {spot[1]}")
-        spot_rect = Rect(
-            spot[0],
-            spot[1],
-            10,
-            10
-        )
-        canvas.draw_rect(spot_rect)
+        canvas.draw_circle(spot[0], spot[1], 5)
 
 can.register('draw', draw_spot)
 can.hide()

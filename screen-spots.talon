@@ -11,7 +11,6 @@ spot heatmap off: user.hide_spot()
 spot (click|touch) <user.text>: user.click_spot(user.text)
 
 # move the cursor to a saved spot
-
 spot [move] <user.text>: user.move_to_spot(user.text)
 
 # hold left click then move the cursor to a saved spot
