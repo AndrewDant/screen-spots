@@ -1,4 +1,6 @@
-from talon import ctrl, Module, actions, storage, imgui
+from talon import ctrl, Module, actions, storage, imgui, ui, canvas
+from typing import List, NamedTuple, Optional
+from talon.types import Rect
 
 mod = Module()
 
@@ -27,16 +29,38 @@ def backup_spot():
     """Save the spot dictionary to be used again upon reload"""
     storage.set("screen-spots", spot_dictionary)
 
+can = canvas.Canvas.from_screen(ui.main_screen())
+
+def draw_spot(canvas):
+    for key, spot in spot_dictionary.items():
+        print(f"spot: {spot}")
+        print(f"ordinates: {spot[0]}, {spot[1]}")
+        spot_rect = Rect(
+            spot[0],
+            spot[1],
+            10,
+            10
+        )
+        canvas.draw_rect(spot_rect)
+
+can.register('draw', draw_spot)
+can.hide()
 
 @mod.action_class
 class SpotClass:
+    
     def save_spot(spot_key: str):
-        """Saves the current mouse position (to a specific key)"""
+        """Saves the current mouse position (to a specific key phrase)"""
         x = actions.mouse_x()
         y = actions.mouse_y()
 
         spot_dictionary[spot_key] = [x, y]
         backup_spot()
+
+    def show_spot():
+        """Display the spot on the screen"""
+        global can
+        can.freeze()
 
     def move_to_spot(spot_key: str) -> bool:
         """

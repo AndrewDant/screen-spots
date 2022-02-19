@@ -3,6 +3,8 @@ mode: command
 # save a mouse position to a spot name
 spot save <user.text>: user.save_spot(user.text)
 
+spot show all: user.show_spot()
+
 # click a saved spot then return the cursor to its prior position
 spot (click|touch) <user.text>: user.click_spot(user.text)
 
