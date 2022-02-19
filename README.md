@@ -34,13 +34,14 @@ Check screen-spots.talon for more commands. You can delete some or all and list 
 # Working Items
 display spot positions on screen, reference talon_ui_helper
 
+? move some of the commands into a menu only ?
+    - fewer commands to conflict with spot [move] <user.text>
+
 reduce mouse movement speed (instant movement sometimes causes issues)
 
 sometimes coordinates would be better if relative to the current window, could toggle with a command
     * reference talon_ui_helper
 
-application specific spot sets?
+? application specific spot sets?
 
 command to reload from backup
-
-setting to allow auto backup when you save/clear any spot?
