@@ -3,10 +3,6 @@ mode: command
 # save a mouse position to a spot name
 spot save <user.text>: user.save_spot(user.text)
 
-spot heatmap: user.show_spot()
-
-spot heatmap off: user.hide_spot()
-
 # click a saved spot then return the cursor to its prior position
 spot (click|touch) <user.text>: user.click_spot(user.text)
 
@@ -27,3 +23,6 @@ spot list [all]: user.list_spot()
 
 # Close the list of active spot names. including 'clothes' because that's commonly misheard by talon
 spot (close|clothes)$: user.close_spot_list()
+
+# displays a small colored circle at the location of each saved spot
+spot [toggle] heatmap: user.toggle_spot_heatmap()

@@ -8,6 +8,8 @@ mod = Module()
 # Initialize with the spots in storage if there are any. All keys should be strings
 spot_dictionary = storage.get("screen-spots", {})
 
+heatmap_showing = False
+
 
 @imgui.open(y=0)
 def gui_list_keys(gui: imgui.GUI):
@@ -52,15 +54,15 @@ class SpotClass:
         spot_dictionary[spot_key] = [x, y]
         backup_spot()
 
-    def show_spot():
+    def toggle_spot_heatmap():
         """Display the spot on the screen"""
-        global can
-        can.freeze()
-
-    def hide_spot():
-        """Hide all spots"""
-        global can
-        can.hide()
+        global can, heatmap_showing
+        if heatmap_showing:
+            can.hide()
+            heatmap_showing = False
+        else:
+            can.freeze()
+            heatmap_showing = True
 
     def move_to_spot(spot_key: str) -> bool:
         """
