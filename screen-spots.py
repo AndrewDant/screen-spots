@@ -1,7 +1,5 @@
 from talon import ctrl, Module, actions, storage, imgui, ui, canvas
-from typing import List, NamedTuple, Optional
-from talon.types import Rect
-from talon.skia import Shader, Color, Paint, Rect
+from talon.skia import  Paint
 
 mod = Module()
 
