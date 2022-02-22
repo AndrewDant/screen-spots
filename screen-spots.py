@@ -5,6 +5,20 @@ from talon.skia import Shader, Color, Paint, Rect
 
 mod = Module()
 
+setting_heatmap_color = mod.setting(
+    "screen_spots_heatmap_color",
+    type=str,
+    default="ff0F9D58",
+    desc="set the color of the drawn dots in the spot heatmap",
+)
+
+setting_heatmap_size = mod.setting(
+    "screen_spots_heatmap_color",
+    type=int,
+    default=5,
+    desc="set the size of the drawn dots in the spot heatmap",
+)
+
 # Initialize with the spots in storage if there are any. All keys should be strings
 spot_dictionary = storage.get("screen-spots", {})
 
@@ -35,10 +49,10 @@ def backup_spot():
 can = canvas.Canvas.from_screen(ui.main_screen())
 
 def draw_spot(canvas):
-    canvas.paint.color = "ff0F9D58"
+    canvas.paint.color = setting_heatmap_color.get()
     canvas.paint.style = Paint.Style.FILL
     for key, spot in spot_dictionary.items():
-        canvas.draw_circle(spot[0], spot[1], 5)
+        canvas.draw_circle(spot[0], spot[1], setting_heatmap_size.get())
 
 can.register('draw', draw_spot)
 can.hide()
