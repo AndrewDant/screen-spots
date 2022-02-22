@@ -43,6 +43,10 @@ def draw_spot(canvas):
 can.register('draw', draw_spot)
 can.hide()
 
+def refresh():
+    if heatmap_showing:
+        can.freeze()
+
 @mod.action_class
 class SpotClass:
     
@@ -52,6 +56,7 @@ class SpotClass:
         y = actions.mouse_y()
 
         spot_dictionary[spot_key] = [x, y]
+        refresh()
         backup_spot()
 
     def toggle_spot_heatmap():
@@ -98,6 +103,7 @@ class SpotClass:
         global spot_dictionary
         spot_dictionary = {}
         backup_spot()
+        refresh()
         
     def clear_spot(spot_key: str):
         """Remove a specific saved spot"""
@@ -105,6 +111,7 @@ class SpotClass:
         if spot_key in spot_dictionary:
             del spot_dictionary[spot_key]
             backup_spot()
+            refresh()
 
     def list_spot():
         """Display a list of existing spot names"""
