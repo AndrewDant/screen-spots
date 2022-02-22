@@ -29,7 +29,9 @@ Say "spot enemy" whenever you want to move your mouse over that spot
 
 Say "spot drag enemy" to click and drag from the current mouse position to that spot
 
-Check screen-spots.talon for more commands. You can delete some or all and list all spot names
+Say "spot heatmap" to toggle showing all saved spots with a small coloured circle on the screen
+
+Check screen-spots.talon for more commands. You can delete some or all spots and list all spot names
 
 # Working Items
 display spot positions on screen, reference talon_ui_helper
