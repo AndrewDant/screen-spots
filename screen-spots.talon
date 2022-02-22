@@ -23,3 +23,6 @@ spot list [all]: user.list_spot()
 
 # Close the list of active spot names. including 'clothes' because that's commonly misheard by talon
 spot (close|clothes)$: user.close_spot_list()
+
+# displays a small colored circle at the location of each saved spot
+spot [toggle] heatmap: user.toggle_spot_heatmap()

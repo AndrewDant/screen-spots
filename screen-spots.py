@@ -1,9 +1,26 @@
-from talon import ctrl, Module, actions, storage, imgui
+from talon import ctrl, Module, actions, storage, imgui, ui, canvas
+from talon.skia import  Paint
 
 mod = Module()
 
+setting_heatmap_color = mod.setting(
+    "screen_spots_heatmap_color",
+    type=str,
+    default="ff0F9D58",
+    desc="set the color of the drawn dots in the spot heatmap",
+)
+
+setting_heatmap_size = mod.setting(
+    "screen_spots_heatmap_color",
+    type=int,
+    default=5,
+    desc="set the size of the drawn dots in the spot heatmap",
+)
+
 # Initialize with the spots in storage if there are any. All keys should be strings
 spot_dictionary = storage.get("screen-spots", {})
+
+heatmap_showing = False
 
 
 @imgui.open(y=0)
@@ -27,16 +44,42 @@ def backup_spot():
     """Save the spot dictionary to be used again upon reload"""
     storage.set("screen-spots", spot_dictionary)
 
+can = canvas.Canvas.from_screen(ui.main_screen())
+
+def draw_spot(canvas):
+    canvas.paint.color = setting_heatmap_color.get()
+    canvas.paint.style = Paint.Style.FILL
+    for key, spot in spot_dictionary.items():
+        canvas.draw_circle(spot[0], spot[1], setting_heatmap_size.get())
+
+can.register('draw', draw_spot)
+can.hide()
+
+def refresh():
+    if heatmap_showing:
+        can.freeze()
 
 @mod.action_class
 class SpotClass:
+    
     def save_spot(spot_key: str):
-        """Saves the current mouse position (to a specific key)"""
+        """Saves the current mouse position (to a specific key phrase)"""
         x = actions.mouse_x()
         y = actions.mouse_y()
 
         spot_dictionary[spot_key] = [x, y]
+        refresh()
         backup_spot()
+
+    def toggle_spot_heatmap():
+        """Display the spot on the screen"""
+        global can, heatmap_showing
+        if heatmap_showing:
+            can.hide()
+            heatmap_showing = False
+        else:
+            can.freeze()
+            heatmap_showing = True
 
     def move_to_spot(spot_key: str) -> bool:
         """
@@ -72,6 +115,7 @@ class SpotClass:
         global spot_dictionary
         spot_dictionary = {}
         backup_spot()
+        refresh()
         
     def clear_spot(spot_key: str):
         """Remove a specific saved spot"""
@@ -79,6 +123,7 @@ class SpotClass:
         if spot_key in spot_dictionary:
             del spot_dictionary[spot_key]
             backup_spot()
+            refresh()
 
     def list_spot():
         """Display a list of existing spot names"""
