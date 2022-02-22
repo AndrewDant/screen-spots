@@ -19,13 +19,13 @@ Say "spot save one"
 
 Use your cursor as per usual
 
-Say "spot click one" whenever you want to click that spot
+Say "spot click one" or "spot one" whenever you want to click that spot
 
 Move your mouse somewhere new
 
 Say "spot save enemy"
 
-Say "spot enemy" whenever you want to move your mouse over that spot
+Say "spot move enemy" whenever you want to move your mouse over that spot
 
 Say "spot drag enemy" to click and drag from the current mouse position to that spot
 
