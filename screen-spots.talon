@@ -4,10 +4,10 @@ mode: command
 spot save <user.text>: user.save_spot(user.text)
 
 # click a saved spot then return the cursor to its prior position
-spot (click|touch) <user.text>: user.click_spot(user.text)
+spot [(click|touch)] <user.text>: user.click_spot(user.text)
 
 # move the cursor to a saved spot
-spot [move] <user.text>: user.move_to_spot(user.text)
+spot move <user.text>: user.move_to_spot(user.text)
 
 # hold left click then move the cursor to a saved spot
 spot drag <user.text>: user.drag_spot(user.text)
