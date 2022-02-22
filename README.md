@@ -8,7 +8,7 @@ The intended use case is to save the position of buttons or other frequently use
 Your spots are automatically saved to a file so you maintain your set across restarts.
 
 # Installation
-Assumes you already have talon.
+Assumes you already have Talon Voice: https://talonvoice.com/
 
 Clone or copy this entire repo into the user/ directory of your talon installation. 
 
