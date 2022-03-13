@@ -4,20 +4,20 @@ from math import copysign
 
 mod = Module()
 
-setting_movement_distance = mod.setting(
-    "screen_spots_movement_distance",
+setting_slow_move_distance = mod.setting(
+    "screen_spots_slow_move_distance",
     type=int,
-    default=50,
-    desc="the maximum distance to move in either direction at once during slow movement",
+    default=100,
+    desc="the maximum distance to move in either direction per tick during slow movement",
 )
 
-class Mover:
+class SlowMover:
     def __init__(self):
         self.job = None
         self.lock = threading.RLock()
         self.targets = []
 
-    def move_to(self, x, y):
+    def slowly_move_to(self, x, y):
         with self.lock:
             self.targets.append((x, y))
             if self.job is None:
@@ -46,20 +46,20 @@ class Mover:
         x_distance = target_x - current_x
         y_distance = target_y - current_y
 
-        if abs(x_distance) > setting_movement_distance.get():
-            x_distance = copysign(setting_movement_distance.get(), x_distance)
-        if abs(y_distance) > setting_movement_distance.get():
-            y_distance = copysign(setting_movement_distance.get(), y_distance)
+        if abs(x_distance) > setting_slow_move_distance.get():
+            x_distance = copysign(setting_slow_move_distance.get(), x_distance)
+        if abs(y_distance) > setting_slow_move_distance.get():
+            y_distance = copysign(setting_slow_move_distance.get(), y_distance)
 
         if x_distance == 0 and y_distance == 0:
             self.targets.pop(0)
         else:
             actions.mouse_move(current_x + x_distance, current_y + y_distance)
 
-mover = Mover()
+mover = SlowMover()
 
 @mod.action_class
-class MovementActions:
+class SlowMoveActions:
     def slow_mouse_move(x: int, y: int):
         """Move the cursor to a new position non instantly"""
-        mover.move_to(x, y)
+        mover.slowly_move_to(x, y)
