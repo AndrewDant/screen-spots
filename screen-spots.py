@@ -95,7 +95,6 @@ class SpotClass:
         if spot_key in spot_dictionary:
             spot = spot_dictionary[spot_key]
 
-            print(setting_slow_move_enabled)
             if setting_slow_move_enabled.get():
                 actions.user.slow_mouse_move(spot[0], spot[1])
             else:
@@ -111,8 +110,12 @@ class SpotClass:
         was_moved = actions.user.move_to_spot(spot_key)
 
         if was_moved:
-            ctrl.mouse_click(button=0, hold=16000)
-            actions.mouse_move(current_x, current_y)
+            if setting_slow_move_enabled.get():
+                actions.user.slow_mouse_click()
+                actions.user.slow_mouse_move(current_x, current_y)
+            else:
+                ctrl.mouse_click(button=0, hold=16000)
+                actions.mouse_move(current_x, current_y)
 
     def drag_spot(spot_key: str):
         """Drag the mouse from its current location to the saved position (if it exists)"""

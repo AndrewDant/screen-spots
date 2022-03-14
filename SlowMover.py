@@ -1,5 +1,5 @@
 import threading
-from talon import cron, actions, Module
+from talon import cron, actions, Module, ctrl
 from math import copysign
 
 mod = Module()
@@ -7,7 +7,7 @@ mod = Module()
 setting_slow_move_distance = mod.setting(
     "screen_spots_slow_move_distance",
     type=int,
-    default=100,
+    default=200,
     desc="the maximum distance to move in either direction per tick during slow movement",
 )
 
@@ -20,6 +20,12 @@ class SlowMover:
     def slowly_move_to(self, x, y):
         with self.lock:
             self.targets.append((x, y))
+            if self.job is None:
+                self.start()
+
+    def slowly_click(self):
+        with self.lock:
+            self.targets.append('click')
             if self.job is None:
                 self.start()
 
@@ -37,8 +43,14 @@ class SlowMover:
         with self.lock:
             if not self.targets:
                 self.stop()
-            x, y = self.targets[0]
-            self.small_movement(x, y)
+            next_target = self.targets[0]
+            if type(next_target) is tuple:
+                x, y = next_target
+                self.small_movement(x, y)
+            else:
+                ctrl.mouse_click(button=0, hold=16000)
+                self.targets.pop(0)
+
 
     def small_movement(self, target_x, target_y):
         current_x = actions.mouse_x()
@@ -63,3 +75,7 @@ class SlowMoveActions:
     def slow_mouse_move(x: int, y: int):
         """Move the cursor to a new position non instantly"""
         mover.slowly_move_to(x, y)
+
+    def slow_mouse_click():
+        """Click the mouse once the cursor has reached the position it is moving to"""
+        mover.slowly_click()
