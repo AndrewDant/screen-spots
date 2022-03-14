@@ -11,10 +11,17 @@ setting_heatmap_color = mod.setting(
 )
 
 setting_heatmap_size = mod.setting(
-    "screen_spots_heatmap_color",
+    "screen_spots_heatmap_size",
     type=int,
     default=5,
     desc="set the size of the drawn dots in the spot heatmap",
+)
+
+setting_slow_move_enabled = mod.setting(
+    "screen_spots_slow_move_enabled",
+    type=int,
+    default=0,
+    desc="slows the mouse's movement speed during spot commands when enabled (some games don't detect the instant mouse movement correctly). Set to 0 (the default) to disable, any other number to enable",
 )
 
 # Initialize with the spots in storage if there are any. All keys should be strings
@@ -61,7 +68,6 @@ def refresh():
 
 @mod.action_class
 class SpotClass:
-    
     def save_spot(spot_key: str):
         """Saves the current mouse position (to a specific key phrase)"""
         x = actions.mouse_x()
@@ -89,7 +95,10 @@ class SpotClass:
         if spot_key in spot_dictionary:
             spot = spot_dictionary[spot_key]
 
-            actions.mouse_move(spot[0], spot[1])
+            if setting_slow_move_enabled.get():
+                actions.user.slow_mouse_move(spot[0], spot[1])
+            else:
+                actions.mouse_move(spot[0], spot[1])
             return True
         return False
 
@@ -101,8 +110,12 @@ class SpotClass:
         was_moved = actions.user.move_to_spot(spot_key)
 
         if was_moved:
-            ctrl.mouse_click(button=0, hold=16000)
-            actions.mouse_move(current_x, current_y)
+            if setting_slow_move_enabled.get():
+                actions.user.slow_mouse_click()
+                actions.user.slow_mouse_move(current_x, current_y)
+            else:
+                ctrl.mouse_click(button=0, hold=16000)
+                actions.mouse_move(current_x, current_y)
 
     def drag_spot(spot_key: str):
         """Drag the mouse from its current location to the saved position (if it exists)"""
