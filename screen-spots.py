@@ -19,9 +19,9 @@ setting_heatmap_size = mod.setting(
 
 setting_slow_move_enabled = mod.setting(
     "screen_spots_slow_move_enabled",
-    type=bool,
-    default=True,
-    desc="slows the mouse movement speed when enabled (some games don't detect instant mouse movement correctly)",
+    type=int,
+    default=0,
+    desc="slows the mouse's movement speed during spot commands when enabled (some games don't detect the instant mouse movement correctly). Set to 0 (the default) to disable, any other number to enable",
 )
 
 # Initialize with the spots in storage if there are any. All keys should be strings
