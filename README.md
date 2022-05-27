@@ -12,7 +12,7 @@ Assumes you already have Talon Voice: https://talonvoice.com/
 
 Clone or copy this entire repo into the user/ directory of your talon installation. 
 
-# Example
+# Examples
 Place your mouse cursor over something you click a lot.
 
 Say "spot save one"
@@ -33,13 +33,17 @@ Say "spot heatmap" to toggle showing all saved spots with a small coloured circl
 
 Check screen-spots.talon for more commands. You can delete some or all spots and list all spot names
 
-# Working Items
-display spot positions on screen, reference talon_ui_helper
+# Talon Settings
+You can use the following settings to customize how this tool functions. You can refer to the unofficial talon wiki for how [talon settings](https://talon.wiki/unofficial_talon_docs/#settings) work.
 
+- `screen_spots_heatmap_color` the color of the drawn dots in the spot heatmap, default="ff0F9D58"
+- `screen_spots_heatmap_size` the size of the drawn dots in the spot heatmap, default=5
+- `screen_spots_slow_move_enabled` slows the mouse's movement speed during spot commands when enabled (some games don't detect the instant mouse movement correctly). Set to 0 (the default) to disable, any other number to enable
+- `screen_spots_slow_move_distance` the maximum distance to move in either direction per tick during slow movement, default=200
+
+# Working Items
 ? move some of the commands into a menu only ?
     - fewer commands to conflict with spot [move] <user.text>
-
-reduce mouse movement speed (instant movement sometimes causes issues)
 
 sometimes coordinates would be better if relative to the current window, could toggle with a command
     * reference talon_ui_helper
