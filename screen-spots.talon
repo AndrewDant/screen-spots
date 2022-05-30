@@ -12,6 +12,8 @@ spot move <user.text>: user.move_to_spot(user.text)
 # hold left click then move the cursor to a saved spot
 spot drag <user.text>: user.drag_spot(user.text)
 
+spot swipe <user.text>: user.drag_spot(user.text, 1)
+
 # deletes all current spots (does not alter the cached dictionary of spots)
 spot clear all: user.clear_spot_dictionary()
 

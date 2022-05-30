@@ -117,11 +117,14 @@ class SpotClass:
                 ctrl.mouse_click(button=0, hold=16000)
                 actions.mouse_move(current_x, current_y)
 
-    def drag_spot(spot_key: str):
+    def drag_spot(spot_key: str, release_drag: int=0):
         """Drag the mouse from its current location to the saved position (if it exists)"""
         if spot_key in spot_dictionary:
             actions.user.mouse_drag(0)
             actions.user.move_to_spot(spot_key)
+            if release_drag != 0:
+                actions.sleep("50ms")
+                actions.mouse_release(0)
 
     def clear_spot_dictionary():
         """Reset the active spot list to a new empty dictionary"""
