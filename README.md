@@ -12,7 +12,7 @@ Assumes you already have Talon Voice: https://talonvoice.com/
 
 Clone or copy this entire repo into the user/ directory of your talon installation. 
 
-# Examples
+# Examples (view screen-spots.talon for a full list of commands)
 Place your mouse cursor over something you click a lot.
 
 Say "spot save one"
