@@ -1,10 +1,10 @@
 import threading
-from talon import cron, actions, Module, ctrl
+from talon import cron, actions, Module, ctrl, settings
 from math import copysign
 
 mod = Module()
 
-setting_slow_move_distance = mod.setting(
+mod.setting(
     "screen_spots_slow_move_distance",
     type=int,
     default=200,
@@ -58,10 +58,10 @@ class SlowMover:
         x_distance = target_x - current_x
         y_distance = target_y - current_y
 
-        if abs(x_distance) > setting_slow_move_distance.get():
-            x_distance = copysign(setting_slow_move_distance.get(), x_distance)
-        if abs(y_distance) > setting_slow_move_distance.get():
-            y_distance = copysign(setting_slow_move_distance.get(), y_distance)
+        if abs(x_distance) > settings.get('user.screen_spots_slow_move_distance'):
+            x_distance = copysign(settings.get('user.screen_spots_slow_move_distance'), x_distance)
+        if abs(y_distance) > settings.get('user.screen_spots_slow_move_distance'):
+            y_distance = copysign(settings.get('user.screen_spots_slow_move_distance'), y_distance)
 
         if x_distance == 0 and y_distance == 0:
             self.targets.pop(0)

@@ -1,23 +1,23 @@
-from talon import ctrl, Module, actions, storage, imgui, ui, canvas
+from talon import ctrl, Module, actions, storage, imgui, ui, canvas, settings
 from talon.skia import  Paint
 
 mod = Module()
 
-setting_heatmap_color = mod.setting(
+mod.setting(
     "screen_spots_heatmap_color",
     type=str,
     default="ff0F9D58",
     desc="set the color of the drawn dots in the spot heatmap",
 )
 
-setting_heatmap_size = mod.setting(
+mod.setting(
     "screen_spots_heatmap_size",
     type=int,
     default=5,
     desc="set the size of the drawn dots in the spot heatmap",
 )
 
-setting_slow_move_enabled = mod.setting(
+mod.setting(
     "screen_spots_slow_move_enabled",
     type=int,
     default=0,
@@ -54,10 +54,10 @@ def backup_spot():
 can = canvas.Canvas.from_screen(ui.main_screen())
 
 def draw_spot(canvas):
-    canvas.paint.color = setting_heatmap_color.get()
+    canvas.paint.color = settings.get('user.screen_spots_heatmap_color')
     canvas.paint.style = Paint.Style.FILL
     for key, spot in spot_dictionary.items():
-        canvas.draw_circle(spot[0], spot[1], setting_heatmap_size.get())
+        canvas.draw_circle(spot[0], spot[1], settings.get('user.screen_spots_heatmap_size'))
 
 can.register('draw', draw_spot)
 can.hide()
@@ -95,7 +95,7 @@ class SpotClass:
         if spot_key in spot_dictionary:
             spot = spot_dictionary[spot_key]
 
-            if setting_slow_move_enabled.get():
+            if settings.get('user.screen_spots_slow_move_enabled'):
                 actions.user.slow_mouse_move(spot[0], spot[1])
             else:
                 actions.mouse_move(spot[0], spot[1])
@@ -110,7 +110,7 @@ class SpotClass:
         was_moved = actions.user.move_to_spot(spot_key)
 
         if was_moved:
-            if setting_slow_move_enabled.get():
+            if settings.get('user.screen_spots_slow_move_enabled'):
                 actions.user.slow_mouse_click()
                 actions.user.slow_mouse_move(current_x, current_y)
             else:
